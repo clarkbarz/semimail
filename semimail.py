@@ -6,16 +6,25 @@ import cmd
 import getpass
 import imaplib
 
-class HomeScreen(cmd.Cmd):
+#class HomeScreen(cmd.Cmd):
 
 
+# logs into gmail using the info in .login
+def login():
+	auth = open('.login', 'r')
+	mail = imaplib.IMAP4_SSL('imap.gmail.com')
+	mail.login(auth.readline(), auth.readline())
+	#HomeScreen().cmdloop()
 
-def main():
+# receives initial username and password and stores them for later
+def setup():
 	username = raw_input("Enter gmail username: ")
 	password = getpass.getpass()
-	mail = imaplib.IMAP4_SSL('imap.gmail.com')
-	mail.login(username, password)
-	HomeScreen().cmdloop()
+	auth = open('.login', 'w')
+	auth.write(username, '\n', password)
+	auth.close()
 
 if __name__ == '__main__':
-	main()
+	login()
+else:
+	setup()

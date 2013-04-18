@@ -4,14 +4,18 @@
 
 import cmd
 import getpass
+import imaplib
 
 class HomeScreen(cmd.Cmd):
+
 
 
 def main():
 	username = raw_input("Enter gmail username: ")
 	password = getpass.getpass()
-	print password
+	mail = imaplib.IMAP4_SSL('imap.gmail.com')
+	mail.login(username, password)
+	HomeScreen().cmdloop()
 
-if __name__ = '__main__':
+if __name__ == '__main__':
 	main()

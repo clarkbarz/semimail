@@ -4,6 +4,7 @@
 
 import getpass
 
+# receives initial username and password and stores them for later
 def setup():
 	username = raw_input("Enter gmail username: ")
 	password = getpass.getpass()
